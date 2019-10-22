@@ -1,0 +1,62 @@
+<mat-card>
+  <form (ngSubmit)="onSubmit()" class="example-form" #f="ngForm">
+    <div>
+      <div ngModelGroup="formgroup">
+        <mat-form-field class="example-full-width">
+          <input
+          matInput
+          placeholder="username"
+          name="username"
+          ngModel
+          required>
+        </mat-form-field>
+        <button class="mat-raised-button" (click)="suggestUsername()" type="button">suggest name</button>
+        <mat-form-field class="example-full-width">
+          <input 
+          matInput
+          placeholder="Password"
+          name="password"
+          ngModel
+          required>
+        </mat-form-field>  
+      </div>
+      <mat-form-field class="example-full-width">
+        <textarea
+        matInput
+        name="mytext" 
+        id="" 
+        cols="100" 
+        placeholder="enter some text"
+        [(ngModel)]="sometext"
+        rows="8">
+      </textarea>
+      </mat-form-field>
+      <p>{{sometext}}</p>
+      <mat-form-field class="example-full-width">
+        <input 
+        matInput
+        placeholder="email"
+        name="email"
+        ngModel
+        email
+        #email="ngModel"
+        required>
+      </mat-form-field>
+      <ng-template [ngIf]="!email.valid && email.touched">please enter valid email address</ng-template>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+      <mat-radio-group aria-label="Select Gender" *ngFor="let gen of gender">
+        <mat-radio-button>{{gen}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    
+    <button color="primary"  mat-raised-button> submit</button>
+  </form>
+  <mat-divider></mat-divider>
+  <div *ngIf="submitted">
+    <p>{{user.email}}</p>
+    <p>{{user.password}}</p>
+    <p>{{user.username}}</p>
+  </div>
+</mat-card>

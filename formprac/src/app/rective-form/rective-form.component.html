@@ -1,0 +1,71 @@
+<mat-card>
+  <form (ngSubmit)="onSubmit()" class="example-form" [formGroup]="signupForm">
+    <div>
+      <div formGroupName="userdata">
+        <mat-form-field class="example-full-width">
+          <input
+          matInput
+          placeholder="username"
+          formControlName="username"
+          >
+        </mat-form-field>
+        <ng-template [ngIf]="!signupForm.get('userdata.username').valid && signupForm.get('userdata.username').touched" >please enter valid email</ng-template>
+        <button class="mat-raised-button" type="button">suggest name</button>
+        <mat-form-field class="example-full-width">
+          <input 
+          matInput
+          placeholder="Password"
+          formControlName="password"
+          >
+        </mat-form-field>  
+      </div>
+      <div *ngIf="imagepreview !== '' &&  imagepreview">
+          <img [src]="imagepreview" alt="">
+      </div>
+      <input type="file" #fileinput style="opacity: 0;" (change)="onImagePicked($event)"><button class="mat-raised-button" (click)="fileinput.click()" type="button">upload image</button>
+      <mat-form-field class="example-full-width">
+        <textarea
+        matInput
+        name="mytext" 
+        id="" 
+        cols="100" 
+        placeholder="enter some text"
+        
+        rows="8">
+      </textarea>
+      </mat-form-field>
+      <p></p>
+      <mat-form-field class="example-full-width">
+        <input 
+        matInput
+        placeholder="email"
+        formControlName="email"
+        email
+        required>
+      </mat-form-field>
+      <!-- <ng-template [ngIf]="!email.valid && email.touched">please enter valid email address</ng-template> -->
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+      <mat-radio-group aria-label="Select Gender" *ngFor="let gen of gender">
+        <mat-radio-button>{{gen}}</mat-radio-button>
+      </mat-radio-group>
+       <br>
+       <div class="" 
+       formArrayName="hobbies" 
+       *ngFor="let hobbyControl of signupForm.get('hobbies').controls ; let i = index;">
+          <mat-form-field>
+              <input matInput type="text" [formControlName]="i">
+          </mat-form-field> 
+       </div>
+      <button class="mat-raised-button" type="button" (click)="addHobies()">add hobby</button>
+    </div>
+    <button color="primary"  mat-raised-button> submit</button>
+  </form>
+  <!-- <mat-divider></mat-divider>
+  <div *ngIf="submitted">
+    <p>{{user.email}}</p>
+    <p>{{user.password}}</p>
+    <p>{{user.username}}</p>
+  </div> -->
+</mat-card>
